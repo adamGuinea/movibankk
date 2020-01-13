@@ -1,13 +1,12 @@
 .detail {
-
   .arrow-back {
     position: absolute;
     left: 2rem;
     top: 2rem;
     font-size: 4rem;
-    opacity: .5;
+    opacity: 0.5;
     cursor: pointer;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
 
     &:hover {
       opacity: 1;
@@ -33,15 +32,21 @@
       box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
         0 10px 10px rgba(0, 0, 0, 0.22);
 
-        @include respond(phone) {
-          margin-left: 0;
-          object-fit: contain
-        }
+      @include respond(phone) {
+        margin-left: 0;
+        object-fit: contain;
+        order: 2;
+        box-shadow: none;
+      }
     }
 
     .title {
       font-size: 5rem;
       font-weight: 700;
+
+      @include respond(phone) {
+        margin-bottom: 1rem;
+      }
     }
 
     .flex {
@@ -51,26 +56,50 @@
 
       @include respond(phone) {
         flex-direction: column;
+        margin-top: 0;
+      }
+
+      .container {
+        padding-top: 10rem;
+
+        @include respond(phone) {
+          padding-top: 0;
+        }
       }
 
       .date {
         opacity: 0.8;
         margin-right: 1rem;
+
+        @include respond(phone) {
+          margin-bottom: 2rem;
+        }
+      }
+
+      .period {
+        @include respond(phone) {
+          display: none;
+        }
       }
 
       .score {
         opacity: 0.8;
         margin-left: 1rem;
+
+        @include respond(phone) {
+          margin-left: 0;
+        }
       }
     }
 
     .duration {
-      opacity: .8;
+      opacity: 0.8;
       margin-top: 2rem;
     }
 
     @include respond(phone) {
-      transform: translateY(-30%);
+      text-align: center;
+      transform: translateY(0);
     }
   }
 
@@ -85,7 +114,7 @@
   }
 
   .overview {
-    opacity: .8;
+    opacity: 0.8;
     margin: 2rem;
     font-size: 2rem;
     padding-bottom: 4rem;

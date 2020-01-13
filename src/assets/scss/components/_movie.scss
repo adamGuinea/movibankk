@@ -1,6 +1,10 @@
 .homepage-title {
   margin-left: 4rem;
   margin-bottom: 2rem;
+
+  @include respond(tab-port) {
+    text-align: center;
+  }
 }
 
 .movie {

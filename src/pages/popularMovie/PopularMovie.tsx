@@ -1,4 +1,4 @@
-import React, { Fragment, SyntheticEvent } from "react";
+import React, { Fragment } from "react";
 import { format } from "date-fns";
 import classNames from "classnames";
 

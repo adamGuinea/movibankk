@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import { RouteComponentProps, useHistory } from "react-router-dom";
 import { format } from "date-fns";
 
-import { LoadingAnimation } from '../../components/LoadingAnimation';
+import { LoadingAnimation } from "../../components/LoadingAnimation";
 import MovieApi, { Movie } from "../../api/MovieApi";
 
 interface RouteInfo {
@@ -63,7 +63,7 @@ export const SingleMovie = ({ match }: ComponentProps) => {
                 src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                 alt="movie backdrop"
               />
-              <div className="container" style={{ paddingTop: "10rem" }}>
+              <div className="container">
                 <div
                   className="title"
                   dangerouslySetInnerHTML={{
@@ -77,7 +77,7 @@ export const SingleMovie = ({ match }: ComponentProps) => {
                       __html: format(new Date(movie.release_date), "yyyy")
                     }}
                   />
-                  &middot;
+                  <span className="period">&middot;</span>
                   <div className="score">
                     {movie.vote_average * 10}% user score
                   </div>
