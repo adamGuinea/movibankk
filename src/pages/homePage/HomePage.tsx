@@ -24,6 +24,7 @@ export const HomePage = () => {
     const foundMovies = await MovieApi.searchMovie({
       query: title
     });
+
     setFoundMovies(foundMovies);
     setLoading(false);
     setTab(Tabs.foundMovies);
@@ -43,7 +44,8 @@ export const HomePage = () => {
   }, []);
 
   function keyPressed(e: any) {
-    if (e.key === "Enter") {
+
+    if (e.key === "Enter" && title) {
       searchMovies();
     }
   }
