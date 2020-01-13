@@ -23,7 +23,7 @@ export const FoundMovie = ({ foundMovies }: Props) => {
   return (
     <Fragment>
       <h1 className="homepage-title">
-        {foundMovies.results.length > 1
+        {foundMovies.results.length > 0
           ? "Found Movies"
           : "Oops, we couldn't find that title"}
       </h1>
