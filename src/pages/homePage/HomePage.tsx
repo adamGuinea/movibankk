@@ -43,8 +43,7 @@ export const HomePage = () => {
     fetchPopularMovies();
   }, []);
 
-  function keyPressed(e: any) {
-
+  function keyPressed(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter" && title) {
       searchMovies();
     }

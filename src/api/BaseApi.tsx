@@ -17,7 +17,7 @@ export default class BaseApi extends EventEmitter {
     'Content-Type': 'application/json',
   }
 
-  constructor (headers?: any) {
+  constructor (headers?: Record<string, string>) {
     super();
     this.headers = Object.assign(this.headers, headers);
   }

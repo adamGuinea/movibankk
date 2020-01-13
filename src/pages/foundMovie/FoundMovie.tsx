@@ -4,7 +4,6 @@ import { format } from "date-fns";
 import classNames from "classnames";
 
 import logo from '../../assets/img/broken-link-chain.svg';
-
 import { Movies } from "../../api/MovieApi";
 
 interface Props {
