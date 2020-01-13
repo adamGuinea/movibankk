@@ -1,0 +1,9 @@
+.movie-list {
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(2, 1fr);
+
+  @include respond(tab-land) {
+    grid-template-columns: 1fr;
+  }
+}

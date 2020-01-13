@@ -1,0 +1,62 @@
+.homepage-title {
+  margin-left: 4rem;
+  margin-bottom: 2rem;
+}
+
+.movie {
+  margin: 0 auto;
+
+  &__poster {
+    display: grid;
+    margin: 1rem;
+    object-fit: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    .average {
+      position: absolute;
+      font-size: 1.4rem;
+      color: white;
+      display: inline-block;
+      padding: 0.5rem 0.8rem;
+      margin-left: 2rem;
+      margin-top: 2rem;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      letter-spacing: 0.1rem;
+    }
+
+    .low {
+      background-color: #D1225B;
+    }
+
+    .medium {
+      background-color: #4902A3;
+    }
+
+    .high {
+      background-color: #01d277;
+    }
+
+    img {
+      border-radius: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      text-decoration: none;
+      text-align: left;
+      font-size: 1.8rem;
+      color: white;
+      margin: 2rem 0;
+      cursor: pointer;
+    }
+
+    .release-date {
+      opacity: 0.8;
+      font-size: 1.8rem;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+  }
+}
