@@ -7,6 +7,7 @@
     opacity: 0.5;
     cursor: pointer;
     transition: all 0.3s ease;
+    z-index: 10;
 
     &:hover {
       opacity: 1;
@@ -104,8 +105,9 @@
   }
 
   hr {
-    margin: 3rem 0;
+    margin: 3rem;
     opacity: 0.5;
+
   }
 
   h1 {

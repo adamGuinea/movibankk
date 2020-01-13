@@ -1,9 +1,10 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment, SyntheticEvent } from "react";
 import { RouteComponentProps, useHistory } from "react-router-dom";
 import { format } from "date-fns";
 
 import { LoadingAnimation } from "../../components/LoadingAnimation";
 import MovieApi, { Movie } from "../../api/MovieApi";
+import logo from '../../assets/img/broken-link-chain.svg';
 
 interface RouteInfo {
   id: string;
@@ -39,6 +40,10 @@ export const SingleMovie = ({ match }: ComponentProps) => {
     return `${hours}hrs ${minutes}mins`;
   }
 
+  function handleError(e: SyntheticEvent<HTMLImageElement, Event>) {
+    e.currentTarget.src = logo
+  }
+
   if (loading) {
     return <LoadingAnimation />;
   }
@@ -53,6 +58,7 @@ export const SingleMovie = ({ match }: ComponentProps) => {
               arrow_back
             </i>
             <img
+              onError={(e) => handleError(e)}
               src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
               alt="movie backdrop"
             />
@@ -60,6 +66,7 @@ export const SingleMovie = ({ match }: ComponentProps) => {
           <div className="detail__poster">
             <div className="flex">
               <img
+                onError={(e) => handleError(e)}
                 src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                 alt="movie backdrop"
               />

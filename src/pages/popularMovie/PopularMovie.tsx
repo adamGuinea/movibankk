@@ -24,7 +24,7 @@ export const PopularMovie = ({ popularMovies }: Props) => {
                 <span
                   className={classNames("average", {
                     low: vote_average < 5,
-                    medium: vote_average < 8.5 && vote_average > 5,
+                    medium: vote_average <= 8.5 && vote_average >= 5,
                     high: vote_average > 8.5
                   })}
                 >
