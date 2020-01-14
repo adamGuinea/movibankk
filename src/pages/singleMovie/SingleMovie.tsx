@@ -78,14 +78,12 @@ export const SingleMovie = ({ match }: ComponentProps) => {
                   }}
                 />
                 <div className="flex">
-                  {movie.release_date && (
-                    <div
-                      className="date"
-                      dangerouslySetInnerHTML={{
-                        __html: format(new Date(movie.release_date), "yyyy")
-                      }}
-                    />
-                  )}
+                  <div
+                    className="date"
+                    dangerouslySetInnerHTML={{
+                      __html: format(new Date(movie.release_date), "yyyy")
+                    }}
+                  />
                   <span className="period">&middot;</span>
                   <div className="score">
                     {movie.vote_average * 10}% user score
