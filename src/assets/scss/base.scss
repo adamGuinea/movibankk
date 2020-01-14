@@ -31,11 +31,15 @@ body {
   box-sizing: border-box;
   margin: 0;
   font-family: "Montserrat", sans-serif;
-  background-color: #081B23;
+  background-color: #081b23;
 
   ::selection {
     background-color: #01d277;
   }
+}
+
+iframe {
+  display: none;
 }
 
 .container {
