@@ -4,7 +4,7 @@ import { format } from "date-fns";
 
 import { LoadingAnimation } from "../../components/LoadingAnimation";
 import MovieApi, { Movie } from "../../api/MovieApi";
-import logo from '../../assets/img/broken-link-chain.svg';
+import logo from "../../assets/img/broken-link-chain.svg";
 
 interface RouteInfo {
   id: string;
@@ -41,7 +41,7 @@ export const SingleMovie = ({ match }: ComponentProps) => {
   }
 
   function handleError(e: SyntheticEvent<HTMLImageElement, Event>) {
-    e.currentTarget.src = logo
+    e.currentTarget.src = logo;
   }
 
   if (loading) {
@@ -58,7 +58,7 @@ export const SingleMovie = ({ match }: ComponentProps) => {
               arrow_back
             </i>
             <img
-              onError={(e) => handleError(e)}
+              onError={e => handleError(e)}
               src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
               alt="movie backdrop"
             />
@@ -66,7 +66,7 @@ export const SingleMovie = ({ match }: ComponentProps) => {
           <div className="detail__poster">
             <div className="flex">
               <img
-                onError={(e) => handleError(e)}
+                onError={e => handleError(e)}
                 src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                 alt="movie backdrop"
               />
@@ -78,12 +78,14 @@ export const SingleMovie = ({ match }: ComponentProps) => {
                   }}
                 />
                 <div className="flex">
-                  <div
-                    className="date"
-                    dangerouslySetInnerHTML={{
-                      __html: format(new Date(movie.release_date), "yyyy")
-                    }}
-                  />
+                  {movie.release_date && (
+                    <div
+                      className="date"
+                      dangerouslySetInnerHTML={{
+                        __html: format(new Date(movie.release_date), "yyyy")
+                      }}
+                    />
+                  )}
                   <span className="period">&middot;</span>
                   <div className="score">
                     {movie.vote_average * 10}% user score
