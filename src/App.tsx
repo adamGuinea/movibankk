@@ -1,6 +1,6 @@
-import React from 'react';
-import HomePage from './pages/homePage';
-import SingleMovie from './pages/singleMovie';
+import React from "react";
+import HomePage from "./pages/homePage";
+import SingleMovie from "./pages/singleMovie";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 const NotFound = () => (
@@ -19,6 +19,6 @@ const App: React.FC = () => {
       </Switch>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

@@ -30,14 +30,21 @@ export default class BaseApi extends EventEmitter {
   }
 
   handleResponse = async (response: Response) => {
-    if (!response.ok) {
-      if (response.status === 401) {
-        this.emit('tokenExpired');
-      }
-      const error = await response.json().catch(() => null);
-      throw Error(error ? error.message : response.statusText);
+    const { ok, status } = response;
+    if(!ok) {
+      if (status === 401) return {  ok,  ...(await response.json()) };
+      if (status === 404) return { ok, ...(await response.json()) };
+      if (status === 422) return { ok, ...(await response.json()) };
+      if (status !== 422) return { ok, response};
     }
-    return response.json();
+
+    switch(status) {
+      case 201:
+      case 204:
+        return { ok };
+      default:
+        return response.json();
+    }
   }
 
   get = (path: string, query?: GetMoviesParam, headers?: Record<string, string>) => {
