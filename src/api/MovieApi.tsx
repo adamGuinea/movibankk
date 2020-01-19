@@ -1,8 +1,12 @@
 import BaseApi from "./BaseApi";
 
 export type GetMoviesParam = {
-  sort_by?: string
-  query?: string
+  sort_by: string,
+  page: number
+};
+
+export type SearchMoviesParam = {
+  query: string,
 };
 
 export type Movies = {
@@ -48,7 +52,7 @@ class MovieApi extends BaseApi {
     this.get(`/movie/${movieId}`)
   )
 
-  searchMovie = (params: GetMoviesParam): Promise<Movies> => (
+  searchMovie = (params: SearchMoviesParam): Promise<Movies> => (
     this.get('/search/movie', params)
   )
 }

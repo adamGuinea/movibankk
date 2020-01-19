@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 import queryString from 'query-string';
 import EventEmitter from 'event-emitter';
 import { fetch } from 'whatwg-fetch';
-import { GetMoviesParam } from './MovieApi';
+import { GetMoviesParam, SearchMoviesParam } from './MovieApi';
 
 export default class BaseApi extends EventEmitter {
 
@@ -47,7 +47,7 @@ export default class BaseApi extends EventEmitter {
     }
   }
 
-  get = (path: string, query?: GetMoviesParam, headers?: Record<string, string>) => {
+  get = (path: string, query?: GetMoviesParam | SearchMoviesParam, headers?: Record<string, string>) => {
     return fetch(`${this.baseUrl}${path}?${query ? queryString.stringify(query) : ''}&api_key=${this.apiKey}`, {
       headers: this.getHeaders(headers),
     }).then(this.handleResponse);

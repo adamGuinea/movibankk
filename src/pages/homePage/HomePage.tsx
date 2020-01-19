@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useContext, useState, Fragment } from "react";
 
 import { LoadingAnimation } from "../../components/LoadingAnimation";
 import PopularMovie from "../popularMovie";
@@ -6,18 +6,18 @@ import FoundMovie from "../foundMovie";
 import MovieApi, { Movies } from "../../api/MovieApi";
 import logo from "../../assets/img/the-movie-db-logo.png";
 import lines from "../../assets/img/line-group.png";
+import { PageContext } from "../../components/context/PageContext";
 
 enum Tabs {
-  popularMovies = 0,
+  popularMovies,
   foundMovies
 }
 
 export const HomePage = () => {
   const [tab, setTab] = useState<Tabs>(Tabs.popularMovies);
-  const [popularMovies, setPopularMovies] = useState<Movies | null>();
   const [foundMovies, setFoundMovies] = useState<Movies | null>();
-  const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
+  const { popularMovies, loading, setLoading } = useContext(PageContext);
 
   async function searchMovies() {
     setLoading(true);
@@ -29,19 +29,6 @@ export const HomePage = () => {
     setLoading(false);
     setTab(Tabs.foundMovies);
   }
-
-  async function fetchPopularMovies() {
-    setLoading(true);
-    const popularMovies = await MovieApi.getMovies({
-      sort_by: "popularity.desc"
-    });
-    setPopularMovies(popularMovies);
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    fetchPopularMovies();
-  }, []);
 
   function keyPressed(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter" && title) {
