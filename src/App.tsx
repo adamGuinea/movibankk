@@ -1,10 +1,12 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ErrorBoundary from "react-error-boundary";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import HomePage from "./pages/homePage";
-import SingleMovie from "./pages/singleMovie";
 import { FallbackComponent } from "./components/errors/FallbackComponent";
+import { LoadingAnimation } from "./components/LoadingAnimation";
+
+const SingleMovie = lazy(() => import("./pages/singleMovie"));
 
 const App: React.FC = () => {
   return (
@@ -12,7 +14,9 @@ const App: React.FC = () => {
       <Switch>
         <ErrorBoundary FallbackComponent={FallbackComponent}>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/:id" component={SingleMovie} />
+          <Suspense fallback={<LoadingAnimation />}>
+            <Route exact path="/:id" component={SingleMovie} />
+          </Suspense>
         </ErrorBoundary>
       </Switch>
     </BrowserRouter>
