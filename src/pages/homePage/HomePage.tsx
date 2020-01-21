@@ -76,7 +76,7 @@ export const HomePage = () => {
           <PopularMovie popularMovies={popularMovies} />
         )}
         {tab === Tabs.foundMovies && foundMovies && (
-          <FoundMovie foundMovies={foundMovies} />
+          <FoundMovie foundMovies={foundMovies} title={title} />
         )}
       </Suspense>
     </Fragment>
