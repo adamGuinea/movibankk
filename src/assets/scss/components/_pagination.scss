@@ -1,10 +1,10 @@
 .pagination {
   display: flex;
-  justify-content: flex-end;
-  margin-right: 2rem;
+  margin-right: 4rem;
 
   &__button {
     cursor: pointer;
+    color: #8c92ac;
     font-size: 1.8rem;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.9);
     transition: all 0.3s ease 0s;

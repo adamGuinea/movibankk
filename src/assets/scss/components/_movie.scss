@@ -1,9 +1,11 @@
-.homepage-title {
-  margin-left: 4rem;
+.homepage {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 2rem;
 
-  @include respond(tab-port) {
-    text-align: center;
+  &__title {
+    margin-left: 4rem;
+    display: inline-block;
   }
 }
 
@@ -31,11 +33,11 @@
     }
 
     .low {
-      background-color: #D1225B;
+      background-color: #d1225b;
     }
 
     .medium {
-      background-color: #4902A3;
+      background-color: #4902a3;
     }
 
     .high {

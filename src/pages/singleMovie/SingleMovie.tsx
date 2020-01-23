@@ -1,20 +1,16 @@
 import React, { useState, useEffect, Fragment, SyntheticEvent } from "react";
-import { RouteComponentProps, useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { format } from "date-fns";
 
 import MovieApi, { Movie } from "../../api/MovieApi";
 import logo from "../../assets/img/broken-link-chain.svg";
 
-interface RouteInfo {
-  id: string;
-}
-
-interface ComponentProps extends RouteComponentProps<RouteInfo> {}
-
-export const SingleMovie = ({ match }: ComponentProps) => {
+export const SingleMovie = () => {
   const [movie, setMovie] = useState<Movie | null>(null);
 
   let history = useHistory();
+
+  let { id } = useParams();
 
   async function fetchMovie(id: string) {
     const movie = await MovieApi.getMovie(id);
@@ -22,8 +18,8 @@ export const SingleMovie = ({ match }: ComponentProps) => {
   }
 
   useEffect(() => {
-    fetchMovie(match.params.id);
-  }, [match.params.id]);
+    fetchMovie(id || '');
+  }, [id]);
 
   function handleClick() {
     history.goBack();

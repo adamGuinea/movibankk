@@ -1,4 +1,4 @@
-import React, { useState, useContext, lazy, Suspense, useEffect, Fragment } from "react";
+import React, { useState, useContext, lazy, Suspense, Fragment } from "react";
 
 import { LoadingAnimation } from "../../components/LoadingAnimation";
 import MovieApi, { Movies } from "../../api/MovieApi";
@@ -18,7 +18,7 @@ export const HomePage = () => {
   const [tab, setTab] = useState<Tabs>(Tabs.popularMovies);
   const [foundMovies, setFoundMovies] = useState<Movies | null>();
   const [title, setTitle] = useState("");
-  const { popularMovies, loading, setLoading } = useContext(PageContext);
+  const { popularMovies } = useContext(PageContext);
 
   async function searchMovies() {
     const foundMovies = await MovieApi.searchMovie({
@@ -71,4 +71,4 @@ export const HomePage = () => {
       </Suspense>
     </Fragment>
   );
-};
+}

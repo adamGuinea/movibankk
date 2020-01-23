@@ -11,7 +11,7 @@ const pageState = {
   setLoading: (loading: boolean) => {},
   currentPage: 1,
   popularMovies: null,
-  loading: false
+  loading: false,
 };
 
 export const PageContext = React.createContext(pageState);
@@ -33,7 +33,7 @@ export default function PageProvider({ children }: ChildProps) {
 
   useEffect(() => {
     fetchPopularMovies(currentPage);
-  }, []);
+  }, [currentPage]);
 
   const addCurrentPage = () => {
     currentPage < popularMovies.total_pages && setCurrentPage(currentPage + 1);
@@ -53,7 +53,7 @@ export default function PageProvider({ children }: ChildProps) {
         minusCurrentPage,
         popularMovies,
         loading,
-        setLoading
+        setLoading,
       }}
     >
       {children}

@@ -17,19 +17,21 @@ export const PopularMovie = ({ popularMovies }: Props) => {
 
   return (
     <Fragment>
-      <h1 className="homepage-title">Popular Movies</h1>
-      <ul className="pagination">
-        {currentPage > 1 && (
-          <button className="pagination__button" onClick={minusCurrentPage}>
+      <div className="homepage">
+        <h1 className="homepage__title">Popular Movies</h1>
+        <ul className="pagination">
+          {currentPage > 1 && (
+            <button className="pagination__button" onClick={minusCurrentPage}>
+              {" "}
+              previous
+            </button>
+          )}
+          <button className="pagination__button" onClick={addCurrentPage}>
             {" "}
-            previous
+            next
           </button>
-        )}
-        <button className="pagination__button" onClick={addCurrentPage}>
-          {" "}
-          next
-        </button>
-      </ul>
+        </ul>
+      </div>
       <div className="movie-list">
         {popularMovies &&
           popularMovies.results.map(

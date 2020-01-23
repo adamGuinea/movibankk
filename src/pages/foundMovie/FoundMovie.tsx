@@ -8,7 +8,7 @@ import { Movies } from "../../api/MovieApi";
 
 interface Props {
   foundMovies: Movies;
-  title: string
+  title: string;
 }
 
 const handleSrcError = (e: SyntheticEvent<HTMLSourceElement>) => {
@@ -20,15 +20,17 @@ const handleImgError = (e: SyntheticEvent<HTMLImageElement>) => {
 };
 
 export const FoundMovie = ({ foundMovies, title }: Props) => {
-  const isResultPlural = foundMovies.total_results < 2 ? "Movie" : "Movies"
+  const isResultPlural = foundMovies.total_results < 2 ? "Movie" : "Movies";
 
   return (
     <Fragment>
-      <h1 className="homepage-title">
-        {foundMovies.total_results > 0
-          ? `Found ${foundMovies.total_results} ${isResultPlural}`
-          : `Oops, we couldn't find "${title}", try another title`}
-      </h1>
+      <div className="homepage">
+        <h1 className="homepage__title">
+          {foundMovies.total_results > 0
+            ? `Found ${foundMovies.total_results} ${isResultPlural}`
+            : `Oops, we couldn't find "${title}", try another title`}
+        </h1>
+      </div>
       <div className="movie-list">
         {foundMovies &&
           foundMovies.results.map(
@@ -56,11 +58,17 @@ export const FoundMovie = ({ foundMovies, title }: Props) => {
                       alt="movie poster"
                     />
                   </picture>
-                  <Link to={`/${id}`}>
+                  <Link
+                    to={{
+                      pathname: `/${id}`,
+                      state: { from: "root" }
+                    }}
+                  >
                     <div className="title">{title}</div>
                   </Link>
                   {release_date && (
-                    <div className="release-date"
+                    <div
+                      className="release-date"
                       dangerouslySetInnerHTML={{
                         __html: format(new Date(release_date), "MMMM yyyy")
                       }}
