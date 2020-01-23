@@ -2,7 +2,6 @@ import React, { useState, useEffect, Fragment, SyntheticEvent } from "react";
 import { RouteComponentProps, useHistory } from "react-router-dom";
 import { format } from "date-fns";
 
-import { LoadingAnimation } from "../../components/LoadingAnimation";
 import MovieApi, { Movie } from "../../api/MovieApi";
 import logo from "../../assets/img/broken-link-chain.svg";
 
@@ -14,15 +13,11 @@ interface ComponentProps extends RouteComponentProps<RouteInfo> {}
 
 export const SingleMovie = ({ match }: ComponentProps) => {
   const [movie, setMovie] = useState<Movie | null>(null);
-  const [loading, setLoading] = useState(false);
 
   let history = useHistory();
 
   async function fetchMovie(id: string) {
-    setLoading(true);
-
     const movie = await MovieApi.getMovie(id);
-    setLoading(false);
     setMovie(movie);
   }
 
@@ -42,10 +37,6 @@ export const SingleMovie = ({ match }: ComponentProps) => {
 
   function handleError(e: SyntheticEvent<HTMLImageElement, Event>) {
     e.currentTarget.src = logo;
-  }
-
-  if (loading) {
-    return <LoadingAnimation />;
   }
 
   return (

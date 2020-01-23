@@ -18,7 +18,7 @@ export const PageContext = React.createContext(pageState);
 
 export default function PageProvider({ children }: ChildProps) {
   const [popularMovies, setPopularMovies] = useState();
-  const [currentPage, setCurrentPage] = useState(pageState.currentPage);
+  const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
   async function fetchPopularMovies(currentPage: number) {
@@ -29,16 +29,14 @@ export default function PageProvider({ children }: ChildProps) {
     });
     setPopularMovies(popularMovies);
     setLoading(false);
-    console.log(currentPage);
   }
 
   useEffect(() => {
-    console.log("mounted");
-    fetchPopularMovies(pageState.currentPage);
+    fetchPopularMovies(currentPage);
   }, []);
 
   const addCurrentPage = () => {
-    currentPage < 500 && setCurrentPage(currentPage + 1);
+    currentPage < popularMovies.total_pages && setCurrentPage(currentPage + 1);
     fetchPopularMovies(currentPage);
   };
 
