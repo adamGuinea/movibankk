@@ -8,6 +8,7 @@ import { Movies } from "../../api/MovieApi";
 
 interface Props {
   foundMovies: Movies;
+  title: string
 }
 
 const handleSrcError = (e: SyntheticEvent<HTMLSourceElement>) => {
@@ -18,13 +19,15 @@ const handleImgError = (e: SyntheticEvent<HTMLImageElement>) => {
   e.currentTarget.src = logo;
 };
 
-export const FoundMovie = ({ foundMovies }: Props) => {
+export const FoundMovie = ({ foundMovies, title }: Props) => {
+  const isResultPlural = foundMovies.total_results < 2 ? "Movie" : "Movies"
+
   return (
     <Fragment>
       <h1 className="homepage-title">
-        {foundMovies.results.length > 0
-          ? "Found Movies"
-          : "Oops, we couldn't find that title"}
+        {foundMovies.total_results > 0
+          ? `Found ${foundMovies.total_results} ${isResultPlural}`
+          : `Oops, we couldn't find "${title}", try another title`}
       </h1>
       <div className="movie-list">
         {foundMovies &&

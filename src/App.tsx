@@ -1,11 +1,13 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ErrorBoundary from "react-error-boundary";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import HomePage from "./pages/homePage";
-import SingleMovie from "./pages/singleMovie";
 import { FallbackComponent } from "./components/errors/FallbackComponent";
 import PageProvider from "./components/context/PageContext";
+import { LoadingAnimation } from "./components/LoadingAnimation";
+
+const SingleMovie = lazy(() => import("./pages/singleMovie"));
 
 const App: React.FC = () => {
   return (
@@ -15,7 +17,9 @@ const App: React.FC = () => {
           <PageProvider>
             <Route exact path="/" component={HomePage} />
           </PageProvider>
-          <Route exact path="/:id" component={SingleMovie} />
+          <Suspense fallback={<LoadingAnimation />}>
+            <Route exact path="/:id" component={SingleMovie} />
+          </Suspense>
         </ErrorBoundary>
       </Switch>
     </BrowserRouter>

@@ -1,12 +1,13 @@
-import React, { useContext, useState, Fragment } from "react";
+import React, { useState, useContext, lazy, Suspense, useEffect, Fragment } from "react";
 
 import { LoadingAnimation } from "../../components/LoadingAnimation";
-import PopularMovie from "../popularMovie";
-import FoundMovie from "../foundMovie";
 import MovieApi, { Movies } from "../../api/MovieApi";
 import logo from "../../assets/img/the-movie-db-logo.png";
 import lines from "../../assets/img/line-group.png";
 import { PageContext } from "../../components/context/PageContext";
+
+const FoundMovie = lazy(() => import("../foundMovie"));
+const PopularMovie = lazy(() => import("../popularMovie"));
 
 enum Tabs {
   popularMovies,
@@ -20,13 +21,10 @@ export const HomePage = () => {
   const { popularMovies, loading, setLoading } = useContext(PageContext);
 
   async function searchMovies() {
-    setLoading(true);
     const foundMovies = await MovieApi.searchMovie({
       query: title
     });
-
     setFoundMovies(foundMovies);
-    setLoading(false);
     setTab(Tabs.foundMovies);
   }
 
@@ -40,10 +38,6 @@ export const HomePage = () => {
     setTab(Tabs.popularMovies);
   }
 
-  if (loading) {
-    return <LoadingAnimation />;
-  }
-
   return (
     <Fragment>
       <div className="hero">
@@ -53,7 +47,7 @@ export const HomePage = () => {
             arrow_back
           </i>
         )}
-        <img className="lines" src={lines} alt="" />
+        <img className="lines" src={lines} alt="background effect" />
         <img className="hero__logo" src={logo} alt="movie database logo" />
         <div className="wrapper">
           <input
@@ -67,12 +61,14 @@ export const HomePage = () => {
           <i className="material-icons search">search</i>
         </div>
       </div>
-      {tab === Tabs.popularMovies && popularMovies && (
-        <PopularMovie popularMovies={popularMovies} />
-      )}
-      {tab === Tabs.foundMovies && foundMovies && (
-        <FoundMovie foundMovies={foundMovies} />
-      )}
+      <Suspense fallback={<LoadingAnimation />}>
+        {tab === Tabs.popularMovies && popularMovies && (
+          <PopularMovie popularMovies={popularMovies} />
+        )}
+        {tab === Tabs.foundMovies && foundMovies && (
+          <FoundMovie foundMovies={foundMovies} title={title} />
+        )}
+      </Suspense>
     </Fragment>
   );
 };
