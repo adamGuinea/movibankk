@@ -18,7 +18,7 @@ export const SingleMovie = () => {
   }
 
   useEffect(() => {
-    fetchMovie(id || '');
+    id && fetchMovie(id);
   }, [id]);
 
   function handleClick() {
